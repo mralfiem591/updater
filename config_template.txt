@@ -1,0 +1,23 @@
+// This is a template configuration file for the updater script.
+// Your config file must be named "config.json" and placed in the same directory as the updater script.
+// Note: Please do not include any "//" comments in your config file, as they will cause errors.
+// The updater script will automatically create a backup of your config file before updating it, and auto-recover in the case on an error.
+
+{
+    "update_source": "pypi", // Select the update source: PyPi or Github
+    "pypi": {
+        "package_name": ["quillpy", "pandas", "numpy", "pyfiglet", "rich"], // List of packages to update
+        "preferred_method": 2 // Method 1: "pip install {packages} --upgrade", 
+                              // Method 2: "python -m pip install {packages} --upgrade" (recommended + default),
+                              // If the chosen method fails, switch to the other method,
+                              // Each method gets 2 attempts.
+    },
+    "github": {
+        "repo": "quillpy/quillpy", // Repository name (e.g., "username/repo")
+        "branch": "main", // Branch name (e.g., "main" or "master")
+        "exclude": ["Tests/", ".git/", "key.env"] // List of directories or files to exclude from the update.
+                                                  // Note: The script will not delete these files or directories, but will not update them either. This is good for user-specific files to not be updated.
+                                                  // The script will use hashes to detect if excluded files have changed, and will recover them from the backup if changed.
+                                                  // Use "/" to specify directories and "" for files.
+    }
+}
